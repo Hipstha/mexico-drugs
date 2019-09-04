@@ -1,0 +1,58 @@
+﻿Id,Pregunta
+entidad,Entidad
+munici,Municipio
+ds2,Marque el sexo del entrevistado
+ds3,�Qu� edad tiene usted?
+ds5a,�Usted se considera indígena?
+ds6,�Cuál es su estado civil actual?
+ds7,�Cuál es su religión�
+ds8,�Actualmente estudia?
+ds9,�Cuál fue el �último grado que ha completado o completo� en la escuela?
+ds10,�Trabaja� usted durante los �últimos 30 días?
+ds12,"Durante los 7 días de la semana pasada, �estaba usted dispuesto/a o trabajar, si hubiera encontrado trabajo o alguien se lo hubiera ofrecido?"
+ds14,�Cuál fue el principal motivo por el cual no trabajó� o no ha buscado trabajo?
+ds16,�Cuál es su ocupación? SELECCIONE S�LO LA M�S IMPORTANTE
+ds21,"�Alguna vez ha tenido hijos(as), incluyendo adoptados o hijastros?"
+ds22,"�Cuántos hijos(as) viven con usted incluyendo adoptados, hijastros o hijos de su pareja?"
+ds23,�Alguno(a) de sus hijos(as) ha tenido problemas por consumir drogas o alcohol?
+tb02,"�Actualmente fuma tabaco todos los días, algunos días o no fuma actualmente?"
+tb03,"En el pasado, �ha fumado tabaco todos los días?"
+tb04,"En el pasado, �ha fumado productos del tabaco todos los días, algunos días o nunca ha fumado?"
+tb06,"�Cuántos  años  tenía  cuando  fumó� tabaco por primera  vez, aunque fuera  una  sola  fumada de  un  cigarro, de un puro o de una pipa?"
+tb09,�A qué� edad comenzó� a fumar productos del tabaco todos los días?
+tb55,�Actualmente trabaja fuera de su casa?
+dm1a,"Casi todo el mundo toma medicamentos y sustancias por varias razones. Me podría decir si ha tomado, usado, probado Opiáceos: para aliviar el dolor severo (grave, intenso) como la morfina, nubaón, darvon, demerol, roxanol, codeína, talwin, láudano, bupreno"
+dm1b,"Me podría decir si ha tomado, usado, probado Tranquilizantes: para calmar a las personas, calmar los nervios o relajar sus músculos como librium, valium, diacepam, ativan, rohypnol, rivotril, benzodiacepina, tafil, lexotan, también conocidos como 'faroles"
+dm1c,"Me podría decir si ha tomado, usado, probado Sedantes y Barbitúricos: para ayudar a las personas a dormir o a relajarse como equanil, mandrax, sevenal, sopor,  conocidos también como 'pastas' y 'chochos', 'quesos', 'pacidinas'"
+dm1d,"Me podría decir si ha tomado, usado, probado Anfetaminas o  estimulantes: para ayudar a perder peso o dar a la gente más energía como ritalín, asenlix, diestet, benzedrina, aktedrín, captagón, tenuate, pastillas, también conocidas como: 'anfetas', 'aceler"
+dm1a2,"Casi todo el mundo toma medicamentos y sustancias por varias razones. Me podría decir si ha tomado, usado, probado Opiáceos: para aliviar el dolor severo (grave, intenso) como la morfina, nubaón, darvon, demerol, roxanol, codeína, talwin, láudano, bupreno"
+dm4a,�Qu� edad tenía cuando usó� opiáceos fuera de prescripción médica por primera vez?
+dm4a_2,�La primera vez usó� opiáceos fuera de prescripción médica fue ....?
+dm4b,�Qu� edad tenía cuando usó� tranquilizantes fuera de prescripción médica por primera vez?
+dm4b_2,�La primera vez usó� tranquilizantes fuera de prescripción médica fue ....?
+dm4c,�Qu� edad tenía cuando usó� sedantes y barbitúricos fuera de prescripción médica por primera vez?
+dm4c_2,�La primera vez usó� sedantes y barbitúricos fuera de prescripción médica fue ....?
+dm4d,�Qu� edad tenía cuando usó� anfetaminas o estimulantes fuera de prescripción médica por primera vez?
+dm4d_2,�La primera vez usó� anfetaminas o estimulantes fuera de prescripción médica fue ....?
+di1a,"Continuando con el uso de sustancias. Me podría decir si ha tomado, usado, probado MARIGUANA. También llamada 'hashish', 'mota', 'café�', 'yerba', etc. para drogarse."
+di1b,"Me podría decir si ha tomado, usado, probado COCA�NA, incluyendo todas las diferentes formas como polvo, pasta base y pasta de coca,  también llamada 'perico', 'nieve', 'grapa', 'coca', etc."
+di1c,"Me podría decir si ha tomado, usado, probado CRACK, también llamado 'piedra'."
+di1d,"Me podría decir si ha tomado, usado, probado  ALUCIN�GENOS como hongos, peyote, mezcalina, LSD conocido como 'trip' o 'viaje', PCP, también llamados '�cidos', 'champiñones', 'aceites', etc."
+di1e,"Me podría decir si ha tomado, usado, probado INHALABLES: como thiner, PVC, cemento, resistol, pegamento, pintura, gasolina, activo, sprays, llamados 'chemos', 'memos', 'monas', 'solventes', etc. para drogarse"
+di1f,"Me podría decir si ha tomado, usado, probado HEROÍNA, opio, también llamada 'arpón', 'ficción', 'chiva', 'la H', 'speed ball'."
+di1g,"Me podría decir si ha tomado, usado, probado ESTIMULANTES TIPO ANFETAM�NICO, droga de diseño, �éxtasis, conocido también como 'tachas', MDMA, cristal."
+di1h,"Me podría decir si ha tomado, usado, probado OTRAS DROGAS como: Ketamina, (Especial K), GHB, también conocido como �éxtasis líquido"
+di1i,"Me podría decir si ha tomado, usado, probado Mariguana sintética (Spice, K2, Yucatán Fire)"
+di4a,�Qu� edad tenía cuando usó� mariguana por primera vez?
+di4b,�Qu� edad tenía cuando usó� cocaína por primera vez?
+di4c,"�Qu� edad tenía cuando usó� crack,  por primera vez?"
+di4d,�Qu� edad tenía cuando usó�  alucinógenos por primera vez?
+di4e,�Qu� edad tenía cuando usó� inhalables por primera vez?
+di4f,"�Qu� edad tenía cuando usó�  heroína, opio por primera vez?"
+di4f_2,"�La primera vez usó� heroína, opio fuera de prescripción médica fue ....?"
+di4g,�Qu� edad tenía cuando usó� estimulantes tipo anfetamínico por primera vez?
+di4g_2,�La primera vez usó� estimulantes tipo anfetamínico fuera de prescripción médica fue ....?
+di4h,"�Qu� edad tenía cuando usó� otras drogas como Ketamina, (Especial K), GHB, por primera vez?"
+di4h_2,"�La primera vez usó�  otras drogas como Ketamina, (Especial K), GHB fuera de prescripción médica fue ....?"
+al1,�Ha consumido alguna vez cualquier bebida que contenga alcohol?
+al3,�Qu� edad tenía la primera vez que tomó� una bebida alcohólica en su vida?
