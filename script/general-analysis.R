@@ -1,7 +1,74 @@
 library(tidyverse)
 library(plyr)
+library(igraph)
+library(scales)
 
 data <- read.csv("../data/general-analysis.csv")
+data$X <- NULL
+
+data <- data[data$di1a==1 |
+         data$di1b==1 |
+         data$di1c==1 |
+         data$di1d==1 |
+         data$di1e==1 |
+         data$di1f==1 |
+         data$di1g==1 |
+         data$di1h==1 |
+         data$dm1d==1 |
+         data$dm1b==1 |
+         data$tb02==1 |
+         data$tb02==2,]
+
+
+data_matrix <- data[,c("di1a", "di1b", "di1c", "di1d", "di1e", "di1f",
+                       "di1g", "di1h", "dm1d", "dm1b")]
+
+data_matrix <- data_matrix[data_matrix$di1a!=9,]
+data_matrix <- data_matrix[data_matrix$di1b!=9,]
+data_matrix <- data_matrix[data_matrix$di1c!=9,]
+data_matrix <- data_matrix[data_matrix$di1d!=9,]
+data_matrix <- data_matrix[data_matrix$di1e!=9,]
+data_matrix <- data_matrix[data_matrix$di1f!=9,]
+data_matrix <- data_matrix[data_matrix$di1g!=9,]
+data_matrix <- data_matrix[data_matrix$di1h!=9,]
+data_matrix <- data_matrix[data_matrix$dm1d!=9,]
+data_matrix <- data_matrix[data_matrix$dm1b!=9,]
+
+data_matrix$di1a[data_matrix$di1a==2] <- 0
+data_matrix$di1b[data_matrix$di1b==2] <- 0
+data_matrix$di1c[data_matrix$di1c==2] <- 0
+data_matrix$di1d[data_matrix$di1d==2] <- 0
+data_matrix$di1e[data_matrix$di1e==2] <- 0
+data_matrix$di1f[data_matrix$di1f==2] <- 0
+data_matrix$di1g[data_matrix$di1g==2] <- 0
+data_matrix$di1h[data_matrix$di1h==2] <- 0
+data_matrix$dm1d[data_matrix$dm1d==2] <- 0
+data_matrix$dm1b[data_matrix$dm1b==2] <- 0
+
+
+set.seed(1)
+names(data_matrix) <- c("Marihuana", "Cocaína", "Crack", "Alucinógeno", "Inhalante",
+                        "Heroína", "Estimulantes", "Ketamina", "Opio", "Tranquilizante")
+mat <- as.matrix(data_matrix)
+adyacency <- t(mat) %*% mat
+
+##Eliminación de NA
+last_study_na_rm <- ifelse(is.na(data$ds9), 99, data$ds9)
+why_work_na_rm <- ifelse(is.na(data$ds14), 14, data$ds14)
+much_sons_na_rm <- ifelse(is.na(data$ds22), 11, data$ds22)
+sons_drugs_na_rm <- ifelse(is.na(data$ds23), 4, data$ds23)
+ages_tabaco_na_rm <- ifelse(is.na(data$tb06), 999, data$tb06)
+ages_tranq_na_rm <- ifelse(is.na(data$dm4b), 999, data$dm4b)
+ages_anf_na_rm <- ifelse(is.na(data$dm4d), 999, data$dm4d)
+ages_mar_na_rm <- ifelse(is.na(data$di4a), 999, data$di4a)
+ages_coc_na_rm <- ifelse(is.na(data$di4b), 999, data$di4b)
+ages_cra_na_rm <- ifelse(is.na(data$di4c), 999, data$di4c)
+ages_alu_na_rm <- ifelse(is.na(data$di4d), 999, data$di4d)
+ages_ina_na_rm <- ifelse(is.na(data$di4e), 999, data$di4e)
+ages_hero_na_rm <- ifelse(is.na(data$di4f), 999, data$di4f)
+ages_ext_na_rm <- ifelse(is.na(data$di4h), 999, data$di4h)
+ages_alc_na_rm <- ifelse(is.na(data$al3), 999, data$al3)
+
 
 #Factorización de sexo
 sex <- as.factor(mapvalues(data$ds2, from=c(1,2), to=c("Hombres", "Mujeres")))
@@ -35,8 +102,6 @@ actual_study <- as.factor(mapvalues(data$ds8, from=c(1,2, 3), to=c("No, nunca ha
                                                                    "No, pero si ha estudiado",
                                                                    "Si")))
 
-last_study_na_rm <- ifelse(is.na(data$ds9), 99, data$ds9)
-
 last_study <- as.factor(mapvalues(last_study_na_rm, from=c(1,2,3,4,5,6,7,8,9,99), 
                                   to=c("Primaria incompleta",
                                        "Primaria completa",
@@ -51,7 +116,6 @@ last_study <- as.factor(mapvalues(last_study_na_rm, from=c(1,2,3,4,5,6,7,8,9,99)
 
 did_work <- as.factor(mapvalues(data$ds10, from=c(1,2), to=c("Si", "No")))
 
-why_work_na_rm <- ifelse(is.na(data$ds14), 14, data$ds14)
 why_work <- as.factor(mapvalues(why_work_na_rm, from=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14), 
                                 to=c("Se dedica al hogar", 
                                      "Estudia",
@@ -87,7 +151,6 @@ work <- as.factor(mapvalues(data$ds16, from=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14, 
 
 sons <- as.factor(mapvalues(data$ds21, from=c(1,2), to=c("Si", "No")))
 
-much_sons_na_rm <- ifelse(is.na(data$ds22), 11, data$ds22)
 much_sons <- as.factor(mapvalues(much_sons_na_rm, from=c(0,1,2,3,4,5,6,7,8,9,10,11), 
                                  to=c("No tiene", 
                                       "1",
@@ -102,7 +165,6 @@ much_sons <- as.factor(mapvalues(much_sons_na_rm, from=c(0,1,2,3,4,5,6,7,8,9,10,
                                       "10 o más", 
                                       "Prefiere no decir")))
 
-sons_drugs_na_rm <- ifelse(is.na(data$ds23), 4, data$ds23)
 sons_drugs <- as.factor(mapvalues(sons_drugs_na_rm, from=c(1,2,4), 
                                   to=c("Si", 
                                        "No",
@@ -115,7 +177,6 @@ tabaco_any <- as.factor(mapvalues(data$tb02, from=c(1,2,3,7,9),
                                        "No fuma actualmente",
                                        "No sabe",
                                        "No responde")))
-ages_tabaco_na_rm <- ifelse(is.na(data$tb06), 999, data$tb06)
 ages_tabaco <- cut(ages_tabaco_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                    labels=c("1-10",
                             "11-20",
@@ -131,7 +192,6 @@ tranq_any <- as.factor(mapvalues(data$dm1b, from=c(1,2,9),
                                  to=c("Si",
                                       "No",
                                       "No responde/No sabe")))
-ages_tranq_na_rm <- ifelse(is.na(data$dm4b), 999, data$dm4b)
 ages_tranq <- cut(ages_tranq_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                   labels=c("1-10",
                            "11-20",
@@ -147,7 +207,6 @@ anf_any <- as.factor(mapvalues(data$dm1d, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_anf_na_rm <- ifelse(is.na(data$dm4d), 999, data$dm4d)
 ages_anf <- cut(ages_anf_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -163,7 +222,6 @@ mar_any <- as.factor(mapvalues(data$di1a, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_mar_na_rm <- ifelse(is.na(data$di4a), 999, data$di4a)
 ages_mar <- cut(ages_mar_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -179,7 +237,6 @@ coc_any <- as.factor(mapvalues(data$di1b, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_coc_na_rm <- ifelse(is.na(data$di4b), 999, data$di4b)
 ages_coc <- cut(ages_coc_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -195,7 +252,6 @@ cra_any <- as.factor(mapvalues(data$di1c, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_cra_na_rm <- ifelse(is.na(data$di4c), 999, data$di4c)
 ages_cra <- cut(ages_cra_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -211,7 +267,6 @@ alu_any <- as.factor(mapvalues(data$di1d, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_alu_na_rm <- ifelse(is.na(data$di4d), 999, data$di4d)
 ages_alu <- cut(ages_alu_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -227,7 +282,6 @@ ina_any <- as.factor(mapvalues(data$di1e, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_ina_na_rm <- ifelse(is.na(data$di4e), 999, data$di4e)
 ages_ina <- cut(ages_ina_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -243,7 +297,6 @@ hero_any <- as.factor(mapvalues(data$di1f, from=c(1,2,9),
                                 to=c("Si",
                                      "No",
                                      "No responde/No sabe")))
-ages_hero_na_rm <- ifelse(is.na(data$di4f), 999, data$di4f)
 ages_hero <- cut(ages_hero_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                  labels=c("1-10",
                           "11-20",
@@ -259,7 +312,6 @@ ext_any <- as.factor(mapvalues(data$di1h, from=c(1,2,9),
                                to=c("Si",
                                     "No",
                                     "No responde/No sabe")))
-ages_ext_na_rm <- ifelse(is.na(data$di4h), 999, data$di4h)
 ages_ext <- cut(ages_ext_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -274,7 +326,6 @@ ages_ext <- cut(ages_ext_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf),
 alc_any <- as.factor(mapvalues(data$al1, from=c(1,2),
                                to=c("Si",
                                     "No")))
-ages_alc_na_rm <- ifelse(is.na(data$al3), 999, data$al3)
 ages_alc <- cut(ages_alc_na_rm, breaks=c(-Inf,10,20,30,40,50,60,70,Inf), 
                 labels=c("1-10",
                          "11-20",
@@ -299,7 +350,7 @@ ggplot(as.data.frame(sex)) +
   labs(x = "Sexo",
        y="Cantidad",
        fill="Rango de edades (años)") +
-  ggtitle("Personas encuestadas por estado civíl")
+  ggtitle("Personas encuestadas por rango de edad")
 
 #Personas encuestadas que se consideran indigenas
 ggplot(as.data.frame(sex)) +
@@ -829,4 +880,15 @@ ggplot(as.data.frame(sex)) +
        y="Cantidad",
        fill="Respuesta") +
   ggtitle("¿Que edad tenía cuando comienza a tomar?")
+
+#Transicion
+g<-graph.adjacency(adyacency, mode="undirected", weighted=TRUE, diag=FALSE)
+plot.igraph(g, layout=layout_in_circle, edge.arrow.size=0.1,
+            edge.width=(E(g)$weight/max(E(g))),
+            edge.label=E(g)$weight,
+            edge.color="black",
+            edge.curved=.3,
+            vertex.label.color="blue",
+            edge.label.color="red",
+            main="Transición entre uso de drogas")
 

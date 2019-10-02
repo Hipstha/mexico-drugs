@@ -1,0 +1,61 @@
+﻿Id,Pregunta
+entidad,Entidad
+desc_ent,Descripción de la Entidad
+ds2,Marque el sexo del entrevistado
+ds3,�Qu� edad tiene usted?
+ds5a,�Usted se considera indígena?
+ds6,�Cuál es su estado civil actual?
+ds7,�Cuál es su religión�
+ds8,�Actualmente estudia?
+ds9,�Cuál fue el �último grado que ha completado o completo� en la escuela?
+ds10,�Trabaja� usted durante los �últimos 30 días?
+ds14,�Cuál fue el principal motivo por el cual no trabajó� o no ha buscado trabajo?
+ds16,�Cuál es su ocupación? SELECCIONE S�LO LA M�S IMPORTANTE
+ds21,"�Alguna vez ha tenido hijos(as), incluyendo adoptados o hijastros?"
+ds22,"�Cuántos hijos(as) viven con usted incluyendo adoptados, hijastros o hijos de su pareja?"
+ds23,�Alguno(a) de sus hijos(as) ha tenido problemas por consumir drogas o alcohol?
+di1c,"Me podría decir si ha tomado, usado, probado CRACK, también llamado 'piedra'."
+di3caa,"Principalmente, �cómo ha usado 'sustancia'?   1a. OPCI�N"
+di4c,"�Qu� edad tenía cuando usó� crack,  por primera vez?"
+di5c,�Cuántas veces en su vida ha usado crack'?
+di6c,"�Ha usado crack, en los �últimos 12 meses?"
+di8c,"En los �últimos 30 días, �ha consumido crack?"
+ddg1a,"�Alguna vez en su vida el consumo de 'crack' le dificultó� con frecuencia sus actividades o sus responsabilidades en los estudios, el trabajo o en casa?"
+ddg2a,"�Alguna vez en su vida el consumo de 'crack' le provocó� discusiones u otros problemas repetidos o graves con su familia, amigos, vecinos o compañeros de trabajo?"
+ddg2a1,�Siguió� consumiendo 'crack' a pesar de que le provocaba problemas con estas personas?
+ddg3a,"�Alguna vez en su vida estuvo con frecuencia bajo los efectos de 'crack' En situaciones en las que podía hacerse daño, por ejemplo andando en bicicleta, conduciendo un auto, manejando una máquina o en cualquier otra situación�"
+ddg4a,�Fue detenido por la policía más de una vez por conducir bajo los efectos de 'crack' o a causa de su comportamiento mientras estaba bajo sus efectos?
+ddg5a,�Alguna vez en su vida tuvo con frecuencia tantas ganas de consumir 'crack' que no pudo resistirse a hacerlo o le resultó� difícil pensar en otra cosa?
+ddg6a,"�Alguna vez necesitó� aumentar la cantidad de 'crack' para conseguir que le hiciera efecto, o notó� que ya no conseguía el efecto deseado con la misma cantidad que antes?"
+ddg7a,"�Alguna vez tuvo síntomas de abstinencia, es decir un malestar muy intenso con síntomas como cansancio, dolores de cabeza o temblores cuando consumía menos, dejaba de consumir o estaba sin consumir 'crack'?"
+ddg8a,"�Alguna vez tomó� 'crack' para evitar tener problemas como estos (síntomas de abstinencia como cansancio, dolores de cabeza o temblores)?"
+ddg9a,"�Alguna vez empezó� a consumir 'crack' a pesar de que se había prometido que no lo haría, o consumió� mucho más de lo que se había propuesto?"
+ddg10a,�Alguna vez consumió� 'crack' más frecuentemente o durante más días seguidos de lo que se había propuesto?
+ddg11a,�Alguna vez intentó� consumir menos o dejar de consumir 'crack' y encontró� que no podía hacerlo?
+ddg12a,�Alguna vez ha tenido periodos de varios días o más en los que pasaba tanto tiempo consumiendo o recuperándose de los efectos de 'crack' que casi no le quedaba tiempo para nada más?
+ddg13a,"�Alguna vez ha tenido temporadas en las que dejó� de hacer actividades importantes o las redujo considerablemente debido a su consumo de 'crack' �tales como practicar deportes, trabajar o ver amigos o familiares?"
+ddg14a,"�Alguna vez siguió� consumiendo 'crack' aunque sabía que tenía un problema físico o emocional grave, que podía haber sido provocado o empeorado por el consumo de ellos?"
+ddg15a,�Alguna vez tuvo 3 o más de estas situaciones antes mencionadas en un mismo periodo de 12 meses durante el tiempo que usaba 'crack'?
+di1a,"Continuando con el uso de sustancias. Me podría decir si ha tomado, usado, probado MARIGUANA. También llamada 'hashish', 'mota', 'café�', 'yerba', etc. para drogarse."
+di1b,"Me podría decir si ha tomado, usado, probado COCA�NA, incluyendo todas las diferentes formas como polvo, pasta base y pasta de coca,  también llamada 'perico', 'nieve', 'grapa', 'coca', etc."
+di1d,"Me podría decir si ha tomado, usado, probado  ALUCIN�GENOS como hongos, peyote, mezcalina, LSD conocido como 'trip' o 'viaje', PCP, también llamados '�cidos', 'champiñones', 'aceites', etc."
+di1e,"Me podría decir si ha tomado, usado, probado INHALABLES: como thiner, PVC, cemento, resistol, pegamento, pintura, gasolina, activo, sprays, llamados 'chemos', 'memos', 'monas', 'solventes', etc. para drogarse"
+di1f,"Me podría decir si ha tomado, usado, probado HEROÍNA, opio, también llamada 'arpón', 'ficción', 'chiva', 'la H', 'speed ball'."
+di1g,"Me podría decir si ha tomado, usado, probado ESTIMULANTES TIPO ANFETAM�NICO, droga de diseño, �éxtasis, conocido también como 'tachas', MDMA, cristal."
+di1h,"Me podría decir si ha tomado, usado, probado OTRAS DROGAS como: Ketamina, (Especial K), GHB, también conocido como �éxtasis líquido"
+di4a,�Qu� edad tenía cuando usó� mariguana por primera vez?
+di4b,�Qu� edad tenía cuando usó� cocaína por primera vez?
+di4c,"�Qu� edad tenía cuando usó� crack,  por primera vez?"
+di4d,�Qu� edad tenía cuando usó�  alucinógenos por primera vez?
+di4e,�Qu� edad tenía cuando usó� inhalables por primera vez?
+di4f,"�Qu� edad tenía cuando usó�  heroína, opio por primera vez?"
+di4g,�Qu� edad tenía cuando usó� estimulantes tipo anfetamínico por primera vez?
+di4h,"�Qu� edad tenía cuando usó� otras drogas como Ketamina, (Especial K), GHB, por primera vez?"
+al1,�Ha consumido alguna vez cualquier bebida que contenga alcohol?
+al3,�Qu� edad tenía la primera vez que tomó� una bebida alcohólica en su vida?
+dm1b,"Me podría decir si ha tomado, usado, probado Tranquilizantes: para calmar a las personas, calmar los nervios o relajar sus músculos como librium, valium, diacepam, ativan, rohypnol, rivotril, benzodiacepina, tafil, lexotan, también conocidos como 'faroles"
+dm1d,"Me podría decir si ha tomado, usado, probado Anfetaminas o  estimulantes: para ayudar a perder peso o dar a la gente más energía como ritalín, asenlix, diestet, benzedrina, aktedrín, captagón, tenuate, pastillas, también conocidas como: 'anfetas', 'aceler"
+dm4b,�Qu� edad tenía cuando usó� tranquilizantes fuera de prescripción médica por primera vez?
+dm4d,�Qu� edad tenía cuando usó� anfetaminas o estimulantes fuera de prescripción médica por primera vez?
+tb02,"�Actualmente fuma tabaco todos los días, algunos días o no fuma actualmente?"
+tb06,"�Cuántos  años  tenía  cuando  fumó� tabaco por primera  vez, aunque fuera  una  sola  fumada de  un  cigarro, de un puro o de una pipa?"
