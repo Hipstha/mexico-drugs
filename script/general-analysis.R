@@ -890,5 +890,16 @@ plot.igraph(g, layout=layout_in_circle, edge.arrow.size=0.1,
             edge.curved=.3,
             vertex.label.color="blue",
             edge.label.color="red",
-            main="Transición entre uso de drogas")
+            main="Grafo de transición entre uso de drogas")
+
+#Transicion
+g<-graph.adjacency(adyacency, mode="undirected", weighted=TRUE, diag=FALSE)
+plot.igraph(g, edge.arrow.size=0.1,
+            edge.width=(E(g)$weight/max(E(g))),
+            edge.label=E(g)$weight,
+            edge.color="black",
+            edge.curved=.3,
+            vertex.label.color="blue",
+            edge.label.color="red",
+            main="Grafo de transición entre uso de drogas")
 

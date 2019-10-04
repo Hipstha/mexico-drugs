@@ -1584,9 +1584,678 @@ plot.igraph(g, layout=layout_in_circle, edge.arrow.size=0.1,
             main="Grafo de transición entre uso de drogas ilegales \n en personas que afirman haber usado 'crack'")
 ```
 
+```{r, include=FALSE}
+#Uso para kmedoides
+data1$entidad <- NULL
+data1$desc_ent <- NULL
+data1$di4c.1 <- NULL
+
+#Factorización de sexo
+sort(unique(data1$ds2))
+str(data1$ds2)
+data1$ds2 <- as.numeric(data1$ds2)
+
+#Toma de las edades
+sort(unique(data1$ds3))
+str(data1$ds3)
+data1$ds3 <- as.numeric(cut(data1$ds3, breaks=c(10,20,30,40,50,60,70), 
+            labels=c(1,
+                     2,
+                     3,
+                     4,
+                     5,
+                     6)))
+
+#Se considera indigena?
+sort(unique(data1$ds5a))
+str(data1$ds5a)
+data1$ds5a <- as.numeric(data1$ds5a)
+
+#Estado civíl
+sort(unique(data1$ds6))
+data1$ds6 <- as.numeric(data1$ds6)
+
+#religion
+sort(unique(data1$ds7))
+data1$ds7 <- as.numeric(data1$ds7)
+
+#estudia
+sort(unique(data1$ds8))
+data1$ds8 <- as.numeric(data1$ds8)
+
+#ultimo grado de estudios
+sort(unique(data1$ds9))
+data1$ds9 <- as.numeric(data1$ds9)
+
+#trabaja
+sort(unique(data1$ds10))
+data1$ds10 <- as.numeric(data1$ds10)
+
+#por que no trabaja
+sort(unique(data1$ds14))
+data1$ds14 <- as.numeric(data1$ds14)
+
+#profesion
+sort(unique(data1$ds16))
+data1$ds16 <- as.numeric(data1$ds16)
+
+#tiene hijos
+sort(unique(data1$ds21))
+data1$ds21 <- as.numeric(data1$ds21)
+
+#cuantos hijos
+sort(unique(data1$ds22))
+data1$ds22 <- as.numeric(data1$ds22)
+
+#hijos con drogas
+sort(unique(data1$ds23))
+data1$ds23 <- as.numeric(data1$ds23)
+
+#ha consumido crack ELIMINAR*********
+sort(unique(data1$di1c))
+data1$di1c <- as.numeric(data1$di1c)
+
+#cuantos años tenía
+sort(unique(data1$di4c))
+str(data1$di4c)
+data1$di4c <- as.numeric(cut(data1$di4c, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                            labels=c(-1,
+                                     1,
+                                     2,
+                                     3,
+                                     4,
+                                     5,
+                                     6,
+                                     7)))
+
+#Edad marihuana
+data1$di4a <- as.numeric(cut(data1$di4a, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad cocaína
+data1$di4b <- as.numeric(cut(data1$di4b, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad alucinogenos
+data1$di4d <- as.numeric(cut(data1$di4d, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad inhalantes
+data1$di4e <- as.numeric(cut(data1$di4e, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad heroína
+data1$di4f <- as.numeric(cut(data1$di4f, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad anfetaminas
+data1$di4g <- as.numeric(cut(data1$di4g, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad ketamina
+data1$di4h <- as.numeric(cut(data1$di4h, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad alcohol
+data1$al3 <- as.numeric(cut(data1$al3, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
+
+#edad tabaco
+data1$tb06 <- as.numeric(cut(data1$tb06, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                            labels=c(-1,
+                                     1,
+                                     2,
+                                     3,
+                                     4,
+                                     5,
+                                     6,
+                                     7)))
+
+#edad Tranquilizantes
+data1$dm4b <- as.numeric(cut(data1$dm4b, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                            labels=c(-1,
+                                     1,
+                                     2,
+                                     3,
+                                     4,
+                                     5,
+                                     6,
+                                     7)))
+
+#edad anfetaminicos
+data1$dm4d <- as.numeric(cut(data1$dm4d, breaks=c(-Inf,0,10,20,30,40,50,60,Inf), 
+                             labels=c(-1,
+                                      1,
+                                      2,
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7)))
 
 
+#di4a, di4b, di4d, di4e, di4f, di4g, di4h, al3
+#dm4b, dm4d
+#eliminar  di4c.1 
 
+#Se hace K-medoides
+data1.resc <- data1
+data1.resc$di1c <- NULL
+
+apply(data1.resc, 2, unique)
+data1.resc <- as.data.frame(apply(data1.resc, 2, rescale))
+data1.resc <- format(round(data1.resc, 2), nsmall = 2)
+data1.resc <- as.data.frame(apply(data1.resc, 2, as.numeric))
+apply(data1.resc, 2, unique)
+set.seed(1)
+
+submt <- kmeans(data1.resc, centers=1)$withinss
+for(i in 2:10) submt[i] <- kmeans(data1.resc, centers=i)$withinss
+```
+
+# Selección de clusters
+
+```{r, echo=FALSE}
+plot(1:10, submt, type="b", xlab="Número de clusters", ylab="Diferencias entre elementos de cada grupo")
+abline(v = 4, col="blue", lty=2)
+
+#clarafit <- clara(data1.resc, 4, samples = 1000)
+#df <- clarafit$medoids
+#df <- as.data.frame(t(df))
+```
+
+## Clasificación
+
+```{r, include=FALSE}
+clarafit <- clara(data1.resc, 4, samples = 1000)
+#df <- clarafit$medoids
+df <- as.data.frame(clarafit$medoids)
+#df <- as.data.frame(t(df))
+
+#names(df) <- c("Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4")
+
+df$ds2 <- as.factor(mapvalues(df$ds2, from=c(1, 0), 
+                                to=c("Femenino",
+                                     "Masculino")))
+
+df$ds3 <- as.factor(mapvalues(df$ds3, from=c(0.4, 0.8, 0.6, 0.2, 0.0, 1.0), 
+                              to=c("31-40 años", 
+                                   "51-60 años",
+                                   "41-50 años",
+                                   "21-30 años",
+                                   "10-20 años",
+                                   "61 años o más")))
+
+df$ds5a <- as.factor(mapvalues(df$ds5a, from=c(0, 1), 
+                              to=c("Si", 
+                                   "No")))
+
+df$ds6 <- as.factor(mapvalues(df$ds6, from=c(1.0, 0.4, 0.0, 0.2, 0.6, 0.8), 
+                               to=c("Soltero/a", 
+                                    "Separado/a",
+                                    "Casado/a",
+                                    "Unión libre",
+                                    "Divorciado/a",
+                                    "Viudo/a")))
+
+df$ds7 <- as.factor(mapvalues(df$ds7, from=c(0.0, 1.0, 0.6, 0.8, 0.4, 0.2), 
+                              to=c("Católica", 
+                                   "Ninguna",
+                                   "Cristiana",
+                                   "Otra",
+                                   "Judaica",
+                                   "Protestante o evangélica")))
+
+df$ds8 <- as.factor(mapvalues(df$ds8, from=c(0.5, 0.0, 1.0), 
+                              to=c("No, pero si ha estudiado", 
+                                   "No, nunca ha estudiado",
+                                   "Si")))
+
+df$ds9 <- as.factor(mapvalues(df$ds9, from=c(0.56, 0.33, 0.78, 0.44, 0.00,
+                                             0.22, 1.00, 0.67, 0.89), 
+                              to=c("Secundaria completa", 
+                                   "Primaria completa",
+                                   "Bachillerato completo",
+                                   "Secundaria incompleta",
+                                   "No contesta",
+                                   "Primaria incompleta",
+                                   "Universidad completa",
+                                   "Bachillerato incompleto",
+                                   "Universidad incompleta")))
+
+df$ds10 <- as.factor(mapvalues(df$ds10, from=c(0, 1), 
+                              to=c("Si", 
+                                   "No")))
+
+df$ds14 <- as.factor(mapvalues(df$ds14, from=c(0.00, 0.14, 0.57, 0.21, 0.71,
+                                               1.00, 0.29, 0.79, 0.93, 0.36, 0.43), 
+                               to=c("Si trabaja", 
+                                    "Se dedica al hogar",
+                                    "Desempleado",
+                                    "Estudia",
+                                    "Jornada especial",
+                                    "Otras razones",
+                                    "Es jubilado",
+                                    "Incapacidad temporal",
+                                    "Desastre natural",
+                                    "Incapacidad permanente",
+                                    "Es rentista")))
+
+df$ds16 <- as.factor(mapvalues(df$ds16, from=c(0.29, 0.36, 1.00, 0.43, 0.79, 0.57, 0.50, 0.71,
+                                               0.64, 0.00, 0.21, 0.86, 0.93, 0.07), 
+                               to=c("Oficinista",
+                                    "Obrero calificado",
+                                    "Otra",
+                                    "Obrero no calificado",
+                                    "Ama/o de casa",
+                                    "Campesino",
+                                    "Agricultor",
+                                    "Estudiante",
+                                    "Subempleado",
+                                    "Profesionista",
+                                    "Microempresario",
+                                    "Jubilado",
+                                    "Incapacidad permanente",
+                                    "Maestro")))
+
+df$ds21 <- as.factor(mapvalues(df$ds21, from=c(1, 0), 
+                               to=c("No", 
+                                    "Si")))
+
+df$ds22 <- as.factor(mapvalues(df$ds22, from=c(0.00, 0.14, 0.57, 0.29, 0.43,
+                                               0.71, 1.00, 0.86), 
+                               to=c("Prefiere no decir", 
+                                    "No tiene",
+                                    "3",
+                                    "1",
+                                    "2",
+                                    "4",
+                                    "6",
+                                    "5")))
+
+df$ds23 <- as.factor(mapvalues(df$ds23, from=c(0.00, 0.67, 1.00), 
+                               to=c("No contesta", 
+                                    "Si",
+                                    "No")))
+
+#df$di1c <- as.factor(mapvalues(df$di1c, from=c(0.5), 
+#                               to=c("De 10 a 20 años", 
+#                                    "De 21 a 30 años")))
+
+df$di3caa <- as.factor(mapvalues(df$di3caa, from=c(0.4, 0.5, 0.3, 0.0, 1.0,
+                                                   0.2, 0.6, 0.8, 0.7), 
+                               to=c("Aspirada",
+                                    "Fumada",
+                                    "Inhalada",
+                                    "Prefiere no decir",
+                                    "No sabe / No contesta",
+                                    "Inyectada",
+                                    "Tragada",
+                                    "No como droga",
+                                    "Untada")))
+
+df$di4c <- as.factor(mapvalues(df$di4c, from=c(0.67, 0.33, 0.50, 0.00, 1.00,
+                                               0.83, 0.17), 
+                                 to=c("41-50", 
+                                      "21-30",
+                                      "31-40",
+                                      "1-10",
+                                      "Más de 61",
+                                      "51-60",
+                                      "11-20")))
+
+df$di5c <- as.factor(mapvalues(df$di5c, from=c(0.33, 0.83, 1.00, 0.67, 0.50, 0.00), 
+                               to=c("1-2 veces", 
+                                    "11-49 veces",
+                                    "50 o más",
+                                    "6-10 veces",
+                                    "3-5 veces",
+                                    "Prefiere no decir")))
+
+df$di6c <- as.factor(mapvalues(df$di6c, from=c(0.00, 0.67, 1.00), 
+                               to=c("Prefiere no decir", 
+                                    "Si",
+                                    "No")))
+
+df$di8c <- as.factor(mapvalues(df$di8c, from=c(1.0, 0.4, 0.0, 0.8, 0.6), 
+                               to=c("No", 
+                                    "Si, de 1 a 5 veces",
+                                    "Prefiere no decir",
+                                    "Si, de 20 a más dias",
+                                    "Si, de 6 a 19 dias")))
+
+df$ddg1a <- as.factor(mapvalues(df$ddg1a, from=c(0.00, 0.67, 1.00), 
+                               to=c("No responde", 
+                                    "Si",
+                                    "No")))
+
+df$ddg2a <- as.factor(mapvalues(df$ddg2a, from=c(0.00, 0.67, 1.00), 
+                                to=c("No responde", 
+                                     "Si",
+                                     "No")))
+
+df$ddg2a1 <- as.factor(mapvalues(df$ddg2a1, from=c(0.00, 0.67, 1.00), 
+                                 to=c("No responde", 
+                                      "Si",
+                                      "No")))
+
+df$ddg3a <- as.factor(mapvalues(df$ddg3a, from=c(0.00, 1.00, 0.67), 
+                                to=c("No responde", 
+                                     "No",
+                                     "Si")))
+
+df$ddg4a <- as.factor(mapvalues(df$ddg4a, from=c(0.00, 1.00, 0.67), 
+                                to=c("No responde", 
+                                     "No",
+                                     "Si")))
+
+df$ddg5a <- as.factor(mapvalues(df$ddg5a, from=c(0.00, 0.67, 1.00), 
+                                to=c("No responde", 
+                                     "Si",
+                                     "No")))
+
+df$ddg6a <- as.factor(mapvalues(df$ddg6a, from=c(0.00, 1.00, 0.67), 
+                                to=c("No responde", 
+                                     "No",
+                                     "Si")))
+
+df$ddg7a <- as.factor(mapvalues(df$ddg7a, from=c(0.00, 1.00, 0.67), 
+                                to=c("No responde", 
+                                     "No",
+                                     "Si")))
+
+df$ddg8a <- as.factor(mapvalues(df$ddg8a, from=c(0, 1), 
+                                to=c("No responde", 
+                                     "No")))
+
+df$ddg9a <- as.factor(mapvalues(df$ddg9a, from=c(0.00, 0.67, 1.00), 
+                                to=c("No responde", 
+                                     "Si",
+                                     "No")))
+
+df$ddg10a <- as.factor(mapvalues(df$ddg10a, from=c(0, 1), 
+                                 to=c("No responde", 
+                                      "No")))
+
+df$ddg11a <- as.factor(mapvalues(df$ddg11a, from=c(0.00, 1.00, 0.67), 
+                                 to=c("No responde", 
+                                      "No",
+                                      "Si")))
+
+df$ddg12a <- as.factor(mapvalues(df$ddg12a, from=c(0.00, 0.67, 1.00), 
+                                 to=c("No responde", 
+                                      "Si",
+                                      "No")))
+
+df$ddg13a <- as.factor(mapvalues(df$ddg13a, from=c(0.00, 1.00, 0.67), 
+                                 to=c("No responde", 
+                                      "No",
+                                      "Si")))
+
+df$ddg14a <- as.factor(mapvalues(df$ddg14a, from=c(0.00, 1.00, 0.67), 
+                                 to=c("No responde", 
+                                      "No",
+                                      "Si")))
+
+df$ddg15a <- as.factor(mapvalues(df$ddg15a, from=c(0.00, 0.67, 1.00), 
+                                 to=c("No responde", 
+                                      "Si",
+                                      "No")))
+
+df$di1a <- as.factor(mapvalues(df$di1a, from=c(0.12, 0.00, 1.00), 
+                                 to=c("No", 
+                                      "Si",
+                                      "No responde/No sabe")))
+
+df$di1b <- as.factor(mapvalues(df$di1b, from=c(1, 0), 
+                               to=c("No", 
+                                    "Si")))
+
+df$di1d <- as.factor(mapvalues(df$di1d, from=c(0.12, 0.00, 1.00), 
+                               to=c("No", 
+                                    "Si",
+                                    "No responde/No sabe")))
+
+df$di1e <- as.factor(mapvalues(df$di1e, from=c(0.12, 0.00, 1.00), 
+                               to=c("No", 
+                                    "Si",
+                                    "No responde/No sabe")))
+
+df$di1f <- as.factor(mapvalues(df$di1f, from=c(1, 0), 
+                               to=c("No", 
+                                    "Si")))
+
+df$di1g <- as.factor(mapvalues(df$di1g, from=c(0.12, 0.00, 1.00), 
+                               to=c("No", 
+                                    "Si",
+                                    "No responde/No sabe")))
+
+df$di1h <- as.factor(mapvalues(df$di1h, from=c(0.12, 1.00, 0.00), 
+                               to=c("No", 
+                                    "No responde/No sabe",
+                                    "Si")))
+
+df$di4a <- as.factor(mapvalues(df$di4a, from=c(0.0, 0.4, 0.2, 0.6, 0.8, 1.0), 
+                               to=c("1-10", 
+                                    "21-30",
+                                    "11-20",
+                                    "31-40",
+                                    "41-50",
+                                    "51-60")))
+
+df$di4b <- as.factor(mapvalues(df$di4b, from=c(0.0, 0.4, 0.2, 0.8, 1.0, 0.6), 
+                               to=c("1-10", 
+                                    "21-30",
+                                    "11-20",
+                                    "41-50",
+                                    "51-60",
+                                    "31-40")))
+
+df$di4d <- as.factor(mapvalues(df$di4d, from=c(0.00, 1.00, 0.67, 0.33), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "11-20")))
+
+df$di4e <- as.factor(mapvalues(df$di4e, from=c(0.00, 1.00, 0.67, 0.33), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "11-20")))
+
+df$di4f <- as.factor(mapvalues(df$di4f, from=c(0.00, 0.75, 0.50, 0.25, 1.00), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "11-20",
+                                    "41-50")))
+
+df$di4g <- as.factor(mapvalues(df$di4g, from=c(0.00, 0.50, 0.33, 0.67, 1.00, 0.17, 0.83), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "41-50",
+                                    "Más de 61",
+                                    "11-20",
+                                    "51-60")))
+
+df$di4h <- as.factor(mapvalues(df$di4h, from=c(0.00, 0.50, 0.33, 0.67, 1.00, 0.17, 0.83), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "41-50",
+                                    "Más de 61",
+                                    "11-20",
+                                    "51-60")))
+
+df$al1 <- as.factor(mapvalues(df$al1, from=c(0, 1), 
+                               to=c("Si", 
+                                    "No")))
+
+df$al3 <- as.factor(mapvalues(df$al3, from=c(0.00, 0.50, 0.25, 0.75, 1.00), 
+                              to=c("1-10", 
+                                   "21-30",
+                                   "11-20",
+                                   "31-40",
+                                   "41-50")))
+
+df$dm1b <- as.factor(mapvalues(df$dm1b, from=c(0.12, 0.00, 1.00), 
+                              to=c("No", 
+                                   "Si",
+                                   "No sabe/No responde")))
+
+df$dm1d <- as.factor(mapvalues(df$dm1d, from=c(0.12, 0.00, 1.00), 
+                               to=c("No", 
+                                    "Si",
+                                    "No sabe/No responde")))
+
+df$dm4b <- as.factor(mapvalues(df$dm4b, from=c(0.00, 0.75, 0.50, 1.00, 0.25), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "41-50",
+                                    "11-20")))
+
+df$dm4d <- as.factor(mapvalues(df$dm4d, from=c(0.00, 1.00, 0.67, 0.33), 
+                               to=c("1-10", 
+                                    "31-40",
+                                    "21-30",
+                                    "11-20")))
+
+df$tb02 <- as.factor(mapvalues(df$tb02, from=c(0.25, 0.12, 0.00, 1.00), 
+                               to=c("No fuma actualmente", 
+                                    "Algunos dias",
+                                    "Todos los dias",
+                                    "No responde")))
+
+df$tb06 <- as.factor(mapvalues(df$tb06, from=c(0.00, 0.50, 0.25, 0.75, 1.00), 
+                               to=c("1-10", 
+                                    "21-30",
+                                    "11-20",
+                                    "31-40",
+                                    "41-50")))
+
+names(df) <- c("Sexo",
+               "Edad",
+               "¿Se considera indígena?",
+               "Estado civil",
+               "Religión",
+               "¿Estudia actualmente?",
+               "¿Ultimo grado de estudios?",
+               "¿Trabajó en los últimos 30 días?",
+               "Principal motivo por el que no trabaja",
+               "¿Cual es su ocupación?",
+               "¿Ha tenido hijos?",
+               "¿Cuantos hijos viven con usted?",
+               "¿Tiene hijos con problemas de drogas?",
+               "¿Cómo ha usado la sustancia?",
+               "¿Qué edad tenía cuando la uso por primera vez?",
+               "¿Cuántas veces le ha usado?",
+               "¿La ha usado en los últimos 12 meses?",
+               "¿La ha usado en los últimos 30 dias?",
+               "¿Alguna vez el cosumo afecto sus responsabilidades?",
+               "¿Alguna vez el consumo de 'crack' le provocó discusiones con familia, amigos, vecinos o compañeros?",
+               "¿Siguió consumiendo 'crack' a pesar de dichos problemas?",
+               "¿Ha utilizado 'crack' manejando, en bicicleta o en alguna situación parecida?",
+               "¿Alguna vez ha sido arrestado por su comportamiento bajo los efectos del 'crack'?",
+               "¿Alguna vez ha tenido tantas ganas de consumir 'crack' que no se pudo resistir?",
+               "¿Alguna vez tuvo que aumentar su dosis para conseguir un efecto el cual ya no consiguió con la misma dósis de antes?",
+               "¿Alguna vez ha sentido malestares como cansancio, temblores o dolores por no consumir 'crack'?",
+               "¿Alguna vez tuvo que usar 'crack' para aliviar dichos sintomas?",
+               "¿Alguna vez consumió 'crack' a pesar de que prometió que ya no lo haría?",
+               "¿Alguna vez consumió 'crack' más frecuentemente de lo que se había propuesto?",
+               "¿Alguna vez intentó dejar de consumir 'crack' y se dió cuenta de que no podía hacerlo?",
+               "¿Alguna vez pasó tanto tiempo consumiendo que se dio cuenta que ya no le quedaba tiempo para sus demás actividades?",
+               "¿Ha tenido temporadas en que el uso de 'crack' hizo que disminuyera el tiempo que dedicaba a sus actividades?",
+               "¿Ha usado 'crack' a pesar de tener algun problema de salud grave?",
+               "¿Alguna vez tuvo 3 o más de las situaciones anteriormente mencionadas?",
+               "¿Ha consumido marihuana?",
+               "¿Ha consumido cocaína?",
+               "¿Ha consumido alucinógenos?",
+               "¿Ha consumido inhalantes?",
+               "¿Ha consumido heroína?",
+               "¿Ha consumido estimulantes?",
+               "¿ha consumido ketamina?",
+               "¿Qué edad tenía cuando comenzó a usar marihuana?",
+               "¿Qué edad tenía cuando comenzó a usar cocaína?",
+               "Qué edad tenía cuando comenzó a usar alucinógenos?",
+               "¿Qué edad tenía cuando comenzó a usar inhalantes?",
+               "¿Qué edad tenía cuando comenzó a usar heroína?",
+               "¿Qué edad tenía cuando comenzó a usar estimulantes?",
+               "¿Qué edad tenía cuando comenzó a usar ketamina?",
+               "¿Ha consumido alcohol?",
+               "¿Qué edad tenía cuando comenzó a usar alcohol?",
+               "¿Ha consumido tranquilizantes?",
+               "¿Ha consumido anfetamina?",
+               "¿Qué edad tenía cuando comenzó a usar tranquilizantes?",
+               "¿Qué edad tenía cuando comenzó a usar anfetamina?",
+               "¿Ha consumido tabaco?",
+               "¿Qué edad tenía cuando comenzó a usar tabaco?")
+
+df <- as.data.frame(t(df))
+
+names(df) <- c("Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4")
+```
+
+```{r, echo=FALSE, results="asis"}
+kable(df)
+```
 
 
 
